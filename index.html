@@ -14,7 +14,15 @@
     }
     header {
       flex: 0 1 auto;
+      display: flex;
       background-color: rgb(233, 232, 241);
+      justify-content: center;
+    }
+    header div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 700px;
     }
     main {
       display: grid;
@@ -49,7 +57,10 @@
   </style>
   <body>
     <header>
-      <h2>A history of learning</h2>
+      <div>
+        <h2>My history of learning</h2>
+        <span>Eric Puchmayr</span>
+      </div>
     </header>
     <main>
       <article></article>
