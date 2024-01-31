@@ -1,9 +1,220 @@
 <html>
- 
-<body>
-  <h1>It's a me</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://media2.giphy.com/media/l3q2XXYxkdxzjMC9G/giphy.gif?cid=ecf05e478yk2wq40jl4rb4pirobbj9ostsrjohtsck5l3lvx&ep=v1_gifs_related&rid=giphy.gif&ct=g" />
-</body>
- 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      font-size: 1.2em;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+    }
+    header {
+      flex: 0 1 auto;
+      background-color: rgb(233, 232, 241);
+    }
+    main {
+      display: grid;
+      grid-template-columns: 1fr minmax(20px, 700px) 1fr;
+      grid-template-rows: 1fr;
+      gap: 0px 1em;
+      grid-template-areas: '. . .';
+      min-height: 200px;
+      flex: 1 1 auto;
+      overflow: auto;
+    }
+    section {
+      margin-block: 3rem 1rem;
+    }
+    footer {
+      flex: 0 1 auto;
+      background-color: rgb(233, 232, 241);
+      text-align: center;
+      font-size: 0.6rem;
+    }
+    h1 {
+      margin-block: 0.5rem;
+      font-size: 3rem;
+    }
+    p {
+      margin-block: 0.5rem 1rem;
+    }
+    img {
+      max-width: 450px;
+      margin-bottom: 2rem;
+    }
+  </style>
+  <body>
+    <header>
+      <h2>A history of learning</h2>
+    </header>
+    <main>
+      <article></article>
+      <div>
+        <section>
+          <h2>Hootsuite</h2>
+          <p>
+            Hootsuite was an incredible journey to be a part of. I joined as a
+            front-end developer and helped create the dashboard and what would
+            later become the social media streams, publisher, and composer. I
+            was there for over a decade and worked on a variety of projects,
+            here are some of the highlights.
+          </p>
+        </section>
+        <section>
+          <h3>Layout</h3>
+          <p>
+            The first version of Hootsuite (Brightkit as it was initially
+            called) was a vertical scrolling beast. This is a very hybrid style
+            approach, including strong header and footer elements.
+          </p>
+          <p>
+            At the time the team was so small I had complete ownership over the
+            frontend layout. I would take the PSD, slice it up in Photoshop and
+            then figure out how to best implement the design. I used a modified
+            <a href="https://css-tricks.com/bem-101/" target="_blank">BEM</a>
+            style to handle all the colours and sizes.
+          </p>
+          <p>
+            Funny how you see patterns repeat with utility classes coming back
+            in the form of
+            <a href="https://tailwindcss.com/" target="_blank">Tailwind</a>
+            albeit much easier/cleaner with pre-processing and intellisense.
+          </p>
+          <img src="./images/branding_preview_01.jpg" alt="" />
+          <p>
+            Eventually we created a vertical scrolling "stream" layout, I got to
+            figure out rounded corners before border-radius was a thing (lots of
+            absolute positioning).
+          </p>
+          <img src="./images/legacy_streams.png" alt="" />
+          <p>
+            I went and updated the layout to flexbox once support was high
+            enough amongst our enterprise users. It was always tough to be
+            governed by the number of internet explorer users.
+          </p>
+          <p>
+            The more current version of the streams is horizontal scrolling with
+            inner panels. Moving the tabs to a side menu was a huge change and
+            required a lot of reworking of the existing code. And because this
+            was a rolling update, the old and new code had to coexist.
+          </p>
+          <img src="./images/streams refreshed.jpeg" alt="" />
+        </section>
+        <section>
+          <h3>Legacy Maintenance Pages</h3>
+          <p>
+            Written before css animations were a thing. These showcase the early
+            make-it-happen attitude when working at a start-up. Look at those
+            old-school shiny brand logos.
+          </p>
+          <p>
+            There's animated gifs and fun jquery that moves the backgrounds.
+          </p>
+          <p>
+            To keep these pages lightweight I kept them almost completely self
+            contained, the particle library even japanese translations are
+            included in the one file.
+          </p>
+
+          <p>
+            <video
+              src="./images/Screen Recording 2021-11-26 at 3.21.58 PM.mov"
+              autoplay
+              width="350"
+            ></video>
+          </p>
+          <a href="./broken_pipes/index.html">Broken Pipes</a><br />
+          <a href="./wizard/index.html">Wizard</a>
+        </section>
+        <section>
+          <h3>Themes</h3>
+          <p>
+            While themes were something we always wanted it ended up being very
+            tricky to handle early on. In the end I was juggling 3 different CSS
+            folders full of duplicate files, once the project got larger this
+            became unfeasible to maintain.
+          </p>
+          <p>
+            Ultimately, we reduced to one theme and the users didn't seem to
+            mind. The lesson is, check with the users, maybe you've implemented
+            something they don't even want.
+          </p>
+          <p>
+            Now with CSS variables and js context this would be much easier to
+            implement.
+          </p>
+          <img src="./images/themes_large.jpg" alt="" />
+        </section>
+        <section>
+          <h3>User Interface</h3>
+          <p>
+            Not only did the dashboard change from pages to an SPA (single page
+            app), the design updated from skeuomorphism to flat to a
+            semi-brutalist. These were always challenging updates as legacy code
+            had to update while creating the newer components we wanted to use.
+          </p>
+          <p>
+            Through all of this it had to be internally testable and wrapped in
+            feature flags. When operating in this manner for a certain grace
+            period we are essentially doubling the CSS and more. This can
+            quickly bloat your code base if cleanup is also not taken into
+            consideration.
+          </p>
+          <p>
+            The solution I settled on was a top level class that informs the
+            interface/components. This way the styles are consistently handled
+            like a boolean and cleanup can be completed much faster.
+          </p>
+          <img src="./images/legacy_add_stream.jpg" alt="" /><img
+            src="./images/add_stream.png"
+            alt=""
+          />
+          <img src="./images/amplify_preview.png" alt="" />
+        </section>
+        <section>
+          <h3>Design System / Brand Refresh</h3>
+          <p>
+            After creating an internal styleguide and running into many
+            technical issues we eventually migrated to Storybook as it had
+            finally matured to include all the features we were looking for.
+          </p>
+          <img src="./images/design_system_storybook.png" alt="" />
+          <p>
+            I always took on the task of updating the legacy sections to keep
+            them from falling into disrepair. The largest feature was streams,
+            although another team had ownership, they were usually too busy working on
+            a larger feature (Inbox) and were happy to let me take that particular task.
+          </p>
+          <p>
+            I saw this as a great opportunity to visually enhance the main
+            section that many users encounter first after login.
+          </p>
+          <img src="./images/streams refreshed.jpeg" alt="" />
+        </section>
+        <section>
+          <h3>The story continues</h3>
+          <p></p>
+          <img src="./images/ui-overlay-waffowl.gif" width="100" alt="" />
+        </section>
+      </div>
+
+      <article></article>
+    </main>
+    <footer>
+      <p>
+        <a href="https://github.com/epuchmayr">Github</a>
+        ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <a href="https://www.linkedin.com/in/ericpuchmayr/" target="_blank"
+          >Eric Puchmayr</a
+        >
+      </p>
+    </footer>
+  </body>
 </html>

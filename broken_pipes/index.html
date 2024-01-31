@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Owly | Maintenance</title>
+
+
+<link href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" type="text/css" rel="stylesheet" />
+
+<style type="text/css">
+html {
+	font-family: Arial, Helvetica, sans-serif;
+}
+body {
+	height: 100%;
+}
+#container {
+background-color: #e1d6b7;
+/*background-color: #e1d6b7;*/
+	width: 100%;
+	height: 100%;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+}
+.map {
+background-image: url(images/pipes-map.png);
+background-repeat: no-repeat;
+}
+#pipes-top {
+background-position: -865px -350px;
+	width: 123px;
+	height: 100%;
+	overflow: hidden;
+		position: absolute;
+		top: 0;
+		left: 35%;
+}
+	#drop {
+	background: url(images/drop.png) 0 0 no-repeat;
+	background-size: 0%;
+		width: 28px;
+		height: 47px;
+		position: absolute;
+		top: 67px;
+		left: 14px;
+			z-index: 2;
+	}
+#pipes-right {
+background-position: right bottom;
+	width: 84px;
+	height: 115px;
+		position: absolute;
+		top: 40%;
+		right: 0;
+}
+#pipes-bottom {
+background-position: right top;
+	width: 346px;
+	height: 336px;
+		position: absolute;
+		bottom: 0;
+		left: 42%;
+			z-index: 4;
+}
+	#water-ripple {
+	background: url(images/water-ripple.gif) 0 0 no-repeat;
+		width: 97px;
+		height: 24px;
+			position: absolute;
+			bottom: 0;
+			right: -6px;
+	}
+#water-bg {
+background: url(images/water-bg.png) 0 0 repeat-x;
+	width: 100%;
+	height: 46px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+			z-index: 1;
+}
+#water-fg {
+background: url(images/water-fg.png) 0 0 repeat-x;
+	width: 100%;
+	height: 46px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+			z-index: 3;
+}
+
+#posted-message {
+background-position: 0 0;
+	width: 865px;
+	height: 435px;
+	margin: 45px auto 0;
+}
+#message {
+	padding: 80px 0 0 100px
+}
+h1 {
+color: #222222;
+	font-size: 30px;
+	margin-bottom: .4em;
+}
+p {
+color: #444444;
+	margin-bottom: .8em;
+	padding-right: 280px;
+	font-size: 18px;
+}
+#logo {
+	margin-top: 20px;
+	margin-left: -24px;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<div id="container">
+
+    <div id="pipes-top" class="map"><div id="drop"></div></div>
+    <div id="pipes-right" class="map"></div>
+    <div id="pipes-bottom" class="map"><div id="water-ripple"></div></div>
+    
+    <div id="posted-message" class="map">
+    	<div id="message">
+        <h1>Troubles in the Tubes</h1>
+        <p>Unfortunately, Ow.ly can't fly right now because a problem with an upstream provider is preventing anything from getting through. We're working to restore URL shortening services as soon as possible. Thanks for your patience, we'll be off the ground again in no time.</p>
+        <img id="logo" src="images/logo.png" alt="Owly" />
+        </div>
+    </div>
+    
+    <div id="water">
+        <div id="water-bg" class="original"></div>
+        <div id="water-fg" class="original"></div>
+	</div>
+    
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="application/javascript" language="javascript">
+$(document).ready(function(){
+
+animateWater('#water-fg', '1424px 0', 10000);
+animateWater('#water-bg', '-1424px 0', 20000);
+animateDropSize('#drop', 4000);
+
+function animateWater(target, targetPos, duration) {
+	$(target).animate( {
+		backgroundPosition: targetPos
+	}, duration, 'linear', function() {
+		$(target).css('backgroundPosition', '0 0');
+		animateWater(target, targetPos, duration);
+	});
+}
+
+function animateDropSize(target, duration) {
+	var baseWidth = $(target).width();
+	var basePosX = $(target).css('left');
+	var basePosY = $(target).css('top');
+	$(target).css('left',(parseInt(basePosX) + (baseWidth/2))).animate( {
+		'background-size': '100%',
+		left: basePosX
+	}, duration, 'linear', function() {
+		animateDropPos('#drop', $(window).height(), basePosY, 600);
+	});
+}
+
+function animateDropPos(target, targetPos, basePosY, duration) {
+	$(target).animate( {
+		top: targetPos
+	}, duration, 'swing', function() {
+		resetDrop(target, basePosY);
+		setTimeout(function(){animateDropSize(target, 2000);}, 5000);
+	});
+}
+
+function resetDrop(target, basePosY) {
+	$(target).css('top',basePosY).css('background-size','0%')
+}
+
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
